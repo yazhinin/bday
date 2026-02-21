@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  overflow: hidden;
+  color: white;
+}
+
+.page { display: none; }
+.active { display: block; }
+
+h1 { margin-top: 40px; font-size: 36px; }
+#countdown { font-size: 22px; }
+
+/* Cake */
+.cake {
+  margin: 60px auto;
+  width: 220px;
+  animation: cakeEntry 1.5s ease-in-out;
+}
+
+@keyframes cakeEntry {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.layer {
+  width: 220px;
+  height: 60px;
+  background: #ffb347;
+  border-radius: 12px;
+  margin: auto;
+}
+
+.layer.middle { width: 180px; background: #ffcc5c; }
+.layer.top { width: 140px; background: #ffdd94; }
+
+.candle {
+  width: 10px;
+  height: 40px;
+  background: repeating-linear-gradient(
+    45deg, #fff, #fff 5px, #ff4d6d 5px, #ff4d6d 10px
+  );
+  margin: auto;
+  position: relative;
+  top: -10px;
+  border-radius: 3px;
+}
+
+.flame {
+  width: 15px;
+  height: 25px;
+  background: radial-gradient(circle, yellow 40%, orange 60%);
+  border-radius: 50%;
+  position: absolute;
+  top: -25px;
+  left: -2px;
+  animation: flicker 0.2s infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+.smoke {
+  width: 10px;
+  height: 10px;
+  background: gray;
+  border-radius: 50%;
+  position: absolute;
+  top: -25px;
+  left: 0;
+  opacity: 0;
+}
+
+button {
+  margin-top: 30px;
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover { background: yellow; }
+
+.firework {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(8); opacity: 0; }
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(100vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Direct Music -->
+<audio id="bgMusic" src="song.mp3" loop></audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <h1>Happy Birthday Pava 🫂❤️</h1>
+  <div id="countdown"></div>
+
+  <div class="cake">
+    <div class="candle">
+      <div class="flame" id="flame"></div>
+      <div class="smoke" id="smoke"></div>
+    </div>
+    <div class="layer top"></div>
+    <div class="layer middle"></div>
+    <div class="layer"></div>
+  </div>
+
+  <button onclick="blowCandle()">Blow Candle 🥳</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <h2 id="birthdayMsg"></h2>
+  <button onclick="goToSurprise()">Click for Surprise 💌</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h1>A SMALL MSG FROM YAZHINI For You 💖</h1>
+  <p style="padding:20px;">
+    wish you many more happy returns of the day❤️
+    
+   nama eppo ,eppadi friend anom ne therila la ana romba close agitom☺️
+   11th la unna first paathapoo sriyana thimuru pudicha ponnu pola ithu apdinu nenach😂🤣
+   ana last varaikum nama tha onna irukom😭
+   nama school la onna srichathu🙂‍↕️ aprm senthu test la copy adichau😂 gossip pesunathu😅
+   aprm tamil miss kita irunthu thittu vangurathu😂sudy ku late ah porathu nuu
+   ellame ippo nadanthau mari iruku but time epdi pothune therila.....
+   Ana ippo nama meet pandrathuke months kanakula wait pandra nilamila irukom😣
+   antha days la marakave mudiyathu ,ippo kooda thirumbavum nama senthu onna school ke poganum pola iruku😭
+   
+   ana evolo distance la nama irunthalum ethana naal pesama irunthalum nama thirumba perum pothu
+   athe vibe la irukom pathiya 🫂intha bonding la easy ah kedaichudathu ❤️
+   ithe pola nama epothume irukanum🙂‍↕️🙂‍↕️
+   
+   nee enga irunthalum eppothum un chandramugi siripa mattum vitudatha😂🤣
+   epothum sirichukitte iru,happy iru and jolly ah iru💕
+ 
+   HAPPY BIRTHDAY PAVA❤️🫂
+
+  </p>
+</div>
+
+<script>
+
+var friendName = "Pava";
+var birthday = new Date("Feb 23, 2026 00:00:00").getTime();
+
+setInterval(function() {
+  var now = new Date().getTime();
+  var distance = birthday - now;
+
+  var days = Math.floor(distance / (1000*60*60*24));
+  var hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+  var minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+  var seconds = Math.floor((distance % (1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML =
+  days+"d "+hours+"h "+minutes+"m "+seconds+"s ";
+},1000);
+
+function blowCandle(){
+  document.getElementById("flame").style.display="none";
+  document.getElementById("smoke").style.opacity="1";
+
+  document.getElementById("bgMusic").play();
+
+  createConfetti();
+  createFireworks();
+
+  setTimeout(()=>{
+    document.getElementById("page1").classList.remove("active");
+    document.getElementById("page2").classList.add("active");
+    document.getElementById("birthdayMsg").innerHTML=
+      "Happy Birthday "+friendName+" 🎉❤️<br>May your dreams shine like fireworks ✨";
+  },1500);
+}
+
+function goToSurprise(){
+  document.getElementById("page2").classList.remove("active");
+  document.getElementById("page3").classList.add("active");
+}
+
+function createConfetti(){
+  for(let i=0;i<80;i++){
+    let conf=document.createElement("div");
+    conf.className="confetti";
+    conf.style.left=Math.random()*100+"vw";
+    conf.style.backgroundColor="hsl("+Math.random()*360+",100%,50%)";
+    conf.style.animationDuration=Math.random()*3+2+"s";
+    document.body.appendChild(conf);
+  }
+}
+
+function createFireworks(){
+  for(let i=0;i<30;i++){
+    let fw=document.createElement("div");
+    fw.className="firework";
+    fw.style.left=Math.random()*100+"vw";
+    fw.style.top=Math.random()*100+"vh";
+    fw.style.backgroundColor="hsl("+Math.random()*360+",100%,50%)";
+    document.body.appendChild(fw);
+  }
+}
+
+</script>
+
+</body>
+</html>
